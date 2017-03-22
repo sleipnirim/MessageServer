@@ -13,7 +13,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "Users")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User implements Serializable{
 
     private Long id;
@@ -21,8 +20,6 @@ public class User implements Serializable{
     private String password;
     private boolean online;
     private Set<User> friends;
-    //private Set<User> friendsOf = new HashSet<User>();
-    private Set<Message> messages;
 
     public User(){}
 
@@ -80,28 +77,6 @@ public class User implements Serializable{
 
     public void setFriends(Set<User> friends) {
         this.friends = friends;
-    }
-
-    /*@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "Users_has_Users",
-            joinColumns = @JoinColumn(name = "Users_idUsers1"),
-            inverseJoinColumns = @JoinColumn(name = "Users_idUsers"))
-    public Set<User> getFriendsOf() {
-        return friendsOf;
-    }
-
-    public void setFriendsOf(Set<User> friendsOf) {
-        this.friendsOf = friendsOf;
-    }*/
-
-    @OneToMany(mappedBy = "to", cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
     }
 
     @Override
