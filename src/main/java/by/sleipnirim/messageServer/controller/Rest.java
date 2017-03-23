@@ -1,6 +1,8 @@
 package by.sleipnirim.messageServer.controller;
 
+import by.sleipnirim.messageServer.bean.Message;
 import by.sleipnirim.messageServer.bean.User;
+import by.sleipnirim.messageServer.service.MessageService;
 import by.sleipnirim.messageServer.service.UserService;
 import by.sleipnirim.messageServer.socket.ServerSocketConnection;
 import by.sleipnirim.messageServer.socket.ServerSocketConnectionException;
@@ -20,6 +22,9 @@ public class Rest {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    MessageService messageService;
 
     ServerSocketConnection serverSocketConnection;
 
@@ -51,11 +56,18 @@ public class Rest {
     ResponseEntity<HttpStatus> connect(@RequestBody User user) {
         try {
             serverSocketConnection.connect(user.getId());
-            return new ResponseEntity<HttpStatus>(HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (ServerSocketConnectionException e) {
-            return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
+
+    @RequestMapping(value = "getMessages", method = RequestMethod.GET)
+    ResponseEntity<Set<Message>> getMessages(@RequestBody User userFrom, User userTo) {
+        Set<Message> messages = messageService.findByFromAndTo(userFrom, userTo);
+        return new ResponseEntity<>(messages, HttpStatus.OK);
+    }
+
 
     @Autowired
     public void setServerSocketConnection(ServerSocketConnection serverSocketConnection) {
