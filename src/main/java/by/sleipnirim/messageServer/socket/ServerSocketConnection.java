@@ -138,7 +138,7 @@ public class ServerSocketConnection {
                     try {
                         bufferedReader.close();
                     } catch (IOException e) {
-                        LOG.error("Trying to close bufferder reader from client" +
+                        LOG.error("Trying to close buffered reader from client" +
                                 "socket, but get an exception" + e.getMessage());
                     }
                 }
