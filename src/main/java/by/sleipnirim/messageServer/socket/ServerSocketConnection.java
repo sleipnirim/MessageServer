@@ -123,7 +123,9 @@ public class ServerSocketConnection {
             while (accessible) {
                 try {
                     String inputData = bufferedReader.readLine();
-                    if (inputData.equals("STOP")) break;
+                    if (inputData.equals("STOP")) {
+                        break;
+                    }
                     if (inputData.equals("PING")) inPing++;
                     Message message = mapper.readValue(inputData, Message.class);
                     messageService.save(message);
@@ -132,6 +134,13 @@ public class ServerSocketConnection {
                     }
                 } catch (IOException e) {
                     LOG.error("Error while reading data from client socket : " + e.getMessage());
+                } finally {
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        LOG.error("Trying to close bufferder reader from client" +
+                                "socket, but get an exception" + e.getMessage());
+                    }
                 }
             }
             LOG.debug("User disconnected");
