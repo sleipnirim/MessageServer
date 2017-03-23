@@ -90,10 +90,6 @@ public class ServerSocketConnection {
         }
     }
 
-    public Map<Long, PrintWriter> getConnections() {
-        return connections;
-    }
-
     @Autowired
     public void setMapper(ObjectMapper mapper) {
         this.mapper = mapper;
