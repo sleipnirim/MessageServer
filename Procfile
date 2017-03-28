@@ -1,1 +1,1 @@
-web: sh target/bin/webapp
+web: sh /app/tmp/cache/.m2/repository/by/sleipnirim/messageServer/messageServer/1.0.0/messageServer-1.0.0.jar
