@@ -18,9 +18,9 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/Messaging" />
+        <property name="url" value="jdbc:mysql://mysql43000-spirit.mycloud.by/Messaging"/>
         <property name="username" value="root" />
-        <property name="password" value="1234" />
+        <property name="password" value="IHMpqa34117"/>
     </bean>
 
     <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
