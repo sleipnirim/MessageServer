@@ -7,6 +7,7 @@
     <groupId>by.sleipnirim.messageServer</groupId>
     <artifactId>messageServer</artifactId>
     <version>1.0.0</version>
+    <packaging>war</packaging>
 
     <build>
         <plugins>
@@ -16,6 +17,32 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.jelastic</groupId>
+                <artifactId>jelastic-maven-plugin</artifactId>
+                <version>1.8</version>
+                <configuration>
+                    <email>sleipnirim@gmail.com</email>
+                    <password>1123581321</password>
+                    <environment>spirit</environment>
+
+                    <api_hoster>app.mycloud.by</api_hoster>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webXml>web/WEB-INF/web.xml</webXml>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
